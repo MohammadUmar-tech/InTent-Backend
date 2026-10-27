@@ -19,8 +19,12 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     location: {
-      type: "Point",
-      coordinates: [longitude, latitude],
+     ltd:{
+      type:Number
+     },
+     lgt:{
+      type:Number
+     }
     },
     locationUpdatedAt: {
       type: Date,
@@ -82,6 +86,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+      socketId:{
+        type:String,
+
+    }
   },
   {
     timestamps: true,

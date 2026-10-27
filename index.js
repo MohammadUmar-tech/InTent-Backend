@@ -9,5 +9,5 @@ const port=process.env.PORT||8000
 await connectDb(process.env.DATABASE_URL)
 app.use('/api/auth',authRouter)
 app.listen(port,()=>{
-    console.log(`Servver started at port ${port}`)
+    console.log(`Server started at port ${port}`)
 })

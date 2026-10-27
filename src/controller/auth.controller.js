@@ -1,5 +1,5 @@
-import User from "../models/userModels.js";
-import bcrypt from "bcryptjs";
+import { userModel } from "../models/user.model.js";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const options = {
@@ -19,7 +19,7 @@ export const signup = async (req, res) => {
       });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
         success: false,
@@ -29,7 +29,7 @@ export const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
+    const user = await userModel.create({
       name,
       email,
       password: hashedPassword,
@@ -68,7 +68,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    const user = await userModel.findOne({ email });
     if (!user) {
       return res.status(401).json({
         success: false,
