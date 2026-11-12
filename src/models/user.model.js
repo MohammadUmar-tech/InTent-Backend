@@ -5,30 +5,41 @@ const userSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      trim: true,
     },
     phone: {
       type: String,
       required: true,
+      unique: true,
+      trim: true,
     },
     email: {
       type: String,
       required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
     },
-    password:{
+    password: {
       type: String,
       required: true,
     },
     location: {
-     ltd:{
-      type:Number
-     },
-     lgt:{
-      type:Number
-     }
+      type: {
+        type: String,
+        enum: ["Point"],
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number],
+        default: [0, 0],
+      },
     },
+
     locationUpdatedAt: {
       type: Date,
     },
+
     skills: [
       {
         name: {
@@ -42,6 +53,7 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
+
     preferences: {
       maxDistanceKm: {
         type: Number,
@@ -56,10 +68,12 @@ const userSchema = new mongoose.Schema(
         default: [],
       },
     },
+
     currentGoals: {
       type: [String],
       default: [],
     },
+
     reputation: {
       rating: {
         type: Number,
@@ -76,20 +90,23 @@ const userSchema = new mongoose.Schema(
         default: 0,
       },
     },
+
     otp: {
       type: String,
     },
     otpExpiry: {
       type: Date,
     },
+
     isVerified: {
       type: Boolean,
       default: false,
     },
-      socketId:{
-        type:String,
 
-    }
+    socketId: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
