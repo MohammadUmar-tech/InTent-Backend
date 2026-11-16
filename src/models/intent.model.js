@@ -7,25 +7,22 @@ const intentSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-
+    
     rawText: {
       type: String,
       trim: true,
     },
-
     activity: {
       type: String,
       required: true,
       trim: true,
       lowercase: true,
     },
-
     category: {
       type: String,
       enum: ["sports", "learning", "gaming", "social", "project", "music", "dance", "arts", "fitness", "other"],
       default: "other",
     },
-
     date: {
       type: Date,
       required: true,
@@ -124,6 +121,6 @@ intentSchema.index({ location: "2dsphere" });
 intentSchema.index({ status: 1, activity: 1, date: 1 });
 intentSchema.index({ userId: 1, status: 1 });
 
-const Intent = mongoose.model("Intent", intentSchema);
+const intentModel = mongoose.model("Intent", intentSchema);
 
-export default Intent;
+export default intentModel;
